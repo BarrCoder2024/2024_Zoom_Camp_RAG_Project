@@ -1,0 +1,5 @@
+{"workbench.colorCustomizations": {
+    "terminal.background": "#1a1a1ae5",
+    "terminal.foreground": "#ffffffdf"  // Optional: Makes the text white for contrast
+}
+}

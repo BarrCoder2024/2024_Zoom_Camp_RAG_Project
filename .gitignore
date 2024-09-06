@@ -2,6 +2,7 @@
 
 working/
 folder/
+TheraBuddyRAG/
 
 
 # Byte-compiled / optimized / DLL files
@@ -127,6 +128,7 @@ celerybeat.pid
 
 # Environments
 .env
+.envrc
 .venv
 env/
 venv/
