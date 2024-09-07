@@ -1,0 +1,10 @@
+[counsel_chat_data_ORIGINAL.csv] 
+
+https://towardsdatascience.com/counsel-chat-bootstrapping-high-quality-therapy-data-971b419f33da
+
+
+[mentalhealth_data_ORIGINAL.json]
+
+Original Dataset from Akash Nath, Dr. Sitanath Biswas, and Prof. Saswati Rakshit. (2024). Mental Health Dataset [Data set]. Kaggle. https://doi.org/10.34740/KAGGLE/DSV/8612020
+
+https://www.kaggle.com/datasets/jiscecseaiml/mental-health-dataset/data
