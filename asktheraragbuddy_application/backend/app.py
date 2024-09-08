@@ -1,6 +1,7 @@
-from ingest_to_azure import create_blob_service_client, run_upload
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from ingest_to_azure import create_blob_service_client, run_upload  # Import the functions from ingest_to_azure.py
+from setup_db_table import table_creation  # Import the table creation function from setup_db_table.py
 
 def main():
     # Load environment variables from .env file
@@ -18,6 +19,9 @@ def main():
 
     # Upload mentalhealth_data
     run_upload(local_directory, container_name, 'mentalhealth_data', 'mentalhealth_data', blob_service_client)
+
+    # Call the table creation function to create the database table
+    table_creation()
 
 # Python entry point
 if __name__ == "__main__":
