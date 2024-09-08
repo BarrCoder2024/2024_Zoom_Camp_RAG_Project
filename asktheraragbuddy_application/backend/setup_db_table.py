@@ -44,7 +44,8 @@ def table_creation():
             question_id VARCHAR(50) PRIMARY KEY,
             question_full TEXT,
             answers JSONB,
-            vector VECTOR(1536),  -- Using text-embedding-ada-002 (OpenAI) which produces 1536-dimension vectors
+            question_vector VECTOR(1536),  -- Will be using text-embedding-ada-002 (OpenAI) which produces 1536-dimension vectors 
+            answers_vector VECTOR(1536),  -- Will be using text-embedding-ada-002 (OpenAI) which produces 1536-dimension vectors
             metadata JSONB  -- This will contain topic, question_title, and source
         );
     """
