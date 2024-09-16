@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Q&A</title>
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include Marked.js for Markdown parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.16/marked.min.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        textarea::placeholder {
+            color: #9CA3AF;
+        }
+        #answer-placeholder {
+            color: #9CA3AF;
+        }
+        @keyframes dots {
+            0%, 100% { content: "."; }
+            33% { content: ".."; }
+            66% { content: "..."; }
+        }
+        .fetching::after {
+            content: "...";
+            animation: dots 1s steps(3, end) infinite;
+        }
+        #answer p {
+            margin-bottom: 1em;
+        }
+        #answer ul {
+            margin-left: 1.5em;
+            list-style-type: disc;
+        }
+        #answer h2, #answer h3 {
+            font-weight: bold;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen justify-between items-center bg-gray-100">
+    <!-- Image at the top -->
+    <div id="imageSection" class="mt-4">
+        <img src="./src/assets/asktheragbuddy_front.png" alt="Mental Health Image" class="w-64 h-auto">
+    </div>
+
+    <!-- Text "ASK TheraRAGBuddy" below the image -->
+    <div class="mt-2">
+        <h1 class="text-3xl font-bold text-[#1E120E]">Ask TheraRAGBuddy</h1>
+    </div>
+
+    <!-- Question Box and Submit Button Container -->
+    <div id="questionSection" class="flex flex-col items-center w-full max-w-lg p-4">
+        <!-- Resizable Question Box with placeholder -->
+        <textarea
+            id="question"
+            placeholder="Ask a question on the topic of mental health"
+            class="w-full p-2 border border-gray-300 rounded mb-2 resize-y placeholder-gray-400"
+            rows="2"></textarea>
+
+        <!-- Submit Button (aligned to the right and just below the question box) -->
+        <div class="w-full flex justify-end mt-2">
+            <button
+                onclick="submitQuestion()"
+                class="bg-[#219159] text-white py-2 px-4 text-sm rounded hover:bg-[#1e7b4e] transition-colors">
+                Submit
+            </button>
+        </div>
+    </div>
+
+    <!-- Answer Box -->
+    <div id="answer" class="w-full p-4 bg-white shadow-md rounded max-w-lg mt-2 mb-8">
+        <p id="answer-placeholder" class="text-gray-400">Your answer will appear here.</p>
+    </div>
+
+    <!-- Banner text at the bottom -->
+    <footer class="w-full bg-[#219159] text-white p-4 text-center">
+        <p class="text-sm">
+            AskTheraRAGBuddy RAG application | Built by 
+            <a href="https://verulamblue.com/#contact" class="underline hover:text-blue-300">@BarrCoder</a>
+        </p>
+        <p class="text-xs mt-4">
+            <strong>Important Notice: This experimental Mental Health Q&A RAG model was submitted as part of the final project requirements for the DataTalksClub LLM Zoomcamp.</strong><br>
+            This end-to-end RAG application is an experimental tool designed to provide information on mental health topics. It is not a substitute for professional medical advice, diagnosis, or treatment.<br>
+            Always consult with qualified mental health professionals for personalised advice, diagnosis, or treatment options.
+        </p>
+    </footer>
+
+    <!-- JavaScript to send question to FastAPI and display the answer -->
+    <script>
+        // A list of phrases to bold
+        const boldPhrases = [
+            "Nature of the concept/issue:",
+            "Key aspects:",
+            "Related factors:",
+            "Importance/Impact:",
+            "Professional perspectives:",
+            "Consensus among experts:",
+            "Specific insights or recommendations mentioned:"
+        ];
+
+        let isKeySubmission = false; // Track whether we're in API key submission mode
+        const BASE_URL = "https://asktheraragbuddybackend-gndmegd0gfarb5hb.uksouth-01.azurewebsites.net";
+        // const BASE_URL = window.location.hostname === 'localhost' 
+            //? 'http://localhost:8000' // Local backend
+            //: 'https://asktheraragbuddybackend-gndmegd0gfarb5hb.uksouth-01.azurewebsites.net'; // Replace with your actual Azure backend URL
+
+        async function submitQuestion() {
+            const questionText = document.getElementById('question').value;
+            const answerBox = document.getElementById('answer');
+            const answerPlaceholder = document.getElementById('answer-placeholder');
+
+            if (!questionText) {
+                answerPlaceholder.innerHTML = "Please enter a question.";
+                return;
+            }
+
+            // Show fetching message
+            answerBox.innerHTML = '<p id="answer-placeholder" class="text-gray-400">Your answer is being retrieved<span class="fetching"></span></p>';
+
+            // Determine the correct endpoint based on the state
+            let endpoint = isKeySubmission ? `${BASE_URL}/submit-api-key` : `${BASE_URL}/ask`;
+
+            // Prepare the body based on whether it's a key submission or a question
+            let requestBody = isKeySubmission
+                ? JSON.stringify({ api_key: questionText })  // API key submission
+                : JSON.stringify({ question: questionText }); // Normal question submission
+
+            // Send the question or API key to FastAPI
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: requestBody,
+                    credentials: 'include',  // Ensure cookies are included
+                });
+
+                const data = await response.json();
+                console.log("Response received:", data);
+
+                if (response.ok) {
+                    if (isKeySubmission) {
+                        // If it's API key submission, reset to question mode after successful submission
+                        answerBox.innerHTML = `<p class="text-green-500">API key accepted. You can now ask questions again.</p>`;
+                        isKeySubmission = false;  // Reset to question-asking mode
+                        document.getElementById('question').value = "";  // Clear input box for the next question
+                        document.getElementById('question').placeholder = "Ask a question on the topic of mental health";
+                    } else {
+                        // If it's a normal question, display the answer
+                        // Separate the first paragraph from the rest
+                        const paragraphs = data.answer.split('\n\n');
+    
+                        // Ensure first paragraph isn't bolded and remove "##" if it exists
+                        let firstParagraph = paragraphs[0].trim();
+                        if (firstParagraph.startsWith('##')) {
+                            firstParagraph = firstParagraph.replace(/^##\s*/, ''); // Remove "##" at the start
+                        }
+                        let answerHtml = `<p>${firstParagraph}</p>`;  // First paragraph, no bold
+    
+                        // Process the rest of the paragraphs with bold formatting for specific phrases
+                        for (let i = 1; i < paragraphs.length; i++) {
+                            let paragraphHtml = marked.parse(paragraphs[i]);
+    
+                            boldPhrases.forEach(phrase => {
+                                const boldPhrase = `<strong>${phrase}</strong>`;
+                                const regex = new RegExp(phrase, 'g');
+                                paragraphHtml = paragraphHtml.replace(regex, boldPhrase);
+                            });
+
+                            // Add spacing between sections
+                            answerHtml += `<p style="margin-top: 1em; margin-bottom: 1em;">${paragraphHtml}</p>`;
+                        }
+    
+                        answerBox.innerHTML = answerHtml;
+                    
+                    }
+                } else {
+                    if (data.detail === "Question limit reached. Please provide your OpenAI API key.") {
+                        // Switch to API key submission mode
+                        answerBox.innerHTML = `<p class="text-red-500">${data.detail}</p>`;
+                        isKeySubmission = true;  // Switch to API key mode
+                        document.getElementById('question').value = "";  // Clear input box
+                        document.getElementById('question').placeholder = "Enter your OpenAI API key";  // Prompt for API key
+                    } else {
+                        answerBox.innerHTML = `<p class="text-red-500">Error: ${data.detail}</p>`;
+                    }
+                }
+            } catch (error) {
+                answerBox.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

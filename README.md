@@ -4,5 +4,7 @@
 
 My LLM Zoomcamp end-to-end RAG application
 
+[Ask The RAG Buddy](https://asktheraragbuddy-e7eagmgje3gcf3db.uksouth-01.azurewebsites.net/)
+
  
 

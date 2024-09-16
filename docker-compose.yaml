@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: ./application/backend   # Point to where your backend Dockerfile is
+    image: asktheraragbuddybackend:latest
+    ports:
+      - "80:8000"                      # Expose port 80 on the host, map to port 8000 in container for FastAPI
+    env_file:
+      - .env                           # Ensure .env file is used for environment variables
+    depends_on:
+      - redis                          # Ensure Redis is started before app
+    volumes:
+      - ./application/backend:/app     # Sync code folder with container (optional for development)
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  frontend:
+    build:
+      context: ./application/frontend  # Point to where your frontend Dockerfile is
+    image: asktheraragbuddyfrontend:latest
+    ports:
+      - "80:80"  # Map container's port 80 to host's port 80 for Azure compatibility
+    environment:
+      - https://BACKEND_URL=asktheraragbuddybackend-gndmegd0gfarb5hb.uksouth-01.azurewebsites.net   # Connect the frontend to the backend via the service name
+    volumes:
+      - ./application/frontend:/app    # Sync frontend code (optional for development)
+
+redis:
+    image: asktheraragbuddyreg.azurecr.io/redis:latest  # Pull Redis from ACR
+    ports:
+      - "6379:6379"  # Redis port (optional was for local dev)

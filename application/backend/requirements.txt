@@ -1,0 +1,16 @@
+fastapi==0.113.0                 # For FastAPI framework
+uvicorn==0.30.6                  # For running FastAPI with ASGI server
+openai==1.43.0                   # For OpenAI API integration
+python-dotenv==1.0.1             # For loading environment variables from .env files
+redis==5.0.8                     # For Redis connection
+psycopg2==2.9.9                  # For connecting to PostgreSQL
+langchain==0.2.16                # For LangChain-related functionality
+langchain-community==0.2.16      # For LangChain-related functionality
+langchain-core==0.2.38           # For LangChain-related functionality
+langchain-openai==0.1.23         # For LangChain-related functionality
+langchain-postgres==0.0.9        # For LangChain-related functionality
+langchain-text-splitters==0.2.4  # For LangChain-related functionality
+langdetect==1.0.9                # For LangChain-related functionality
+langsmith==0.1.114               # For LangChain-related functionality
+pydantic==2.8.2                  # For data validation using Pydantic models
+typing-extensions==4.12.2        # Required for type hints (used by FastAPI and Pydantic)
