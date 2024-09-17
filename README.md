@@ -98,7 +98,36 @@ I decided to **Stick with PostgresRetriever** for its high-quality results in al
 
 # RAG Evaluation
 
-## Analysis of Results:
+## Testing for Hallucination 
+Testing for hallucination in a Retrieval-Augmented Generation (RAG) model is crucial to ensure that responses are grounded in the retrieved knowledge and not fabricated. In the context of mental health, hallucinated responses can lead to misinformation, making this evaluation especially important.
+
+### Analysis of Results
+
+1. **Hallucination Detection**:
+   - 2/10 responses flagged (questions 6 and 9).
+
+2. **Token Overlap (faithfulness_score_token)**:
+   - Scores are low (0.01 to 0.17) 
+   - Suggests the model is paraphrasing rather than quoting directly from sources.
+
+3. **Semantic Similarity (faithfulness_score_semantic)**:
+   - High scores (0.75 to 0.90) indicate the responses maintain semantic alignment with the retrieved content, even with paraphrasing.
+
+4. **Relevance**:
+   - All responses marked as "Relevant" in Set 1, even for off-topic questions (8, 9, 10).
+   - Suggests the 0.7 semantic similarity threshold for relevance might be too low.
+
+5. **Confidence Score**:
+   - Scores range from 0.38 to 0.54 in Set 1.
+   - Combines token overlap and semantic similarity to give a nuanced view of system performance.
+
+6. **Handling Off-Topic Questions**:
+   - For non-mental health questions (8, 9, 10), the system acknowledges the mismatch but still marks responses as "Relevant" and "Not hallucinated" in most cases.
+   - This could be improved for better handling of off-topic queries.
+
+<img src="images/rag_hal_test.png" alt="Example Image" style="width:100%; height:100%;" />
+
+## Selecting an appropriate LLM:
 
 In selecting the optimal model for a RAG system for Q&A on mental health, I focused on the following factors:
 
