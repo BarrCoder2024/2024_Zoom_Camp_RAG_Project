@@ -58,7 +58,7 @@ This application demonstrates the practical utility of a Retrieval-Augmented Gen
 # Dense retrieval vs dense retrieval with keyword-based retrieval: Analysis of two retrieval functions PostgresRetriever and HybridPostgresRetriever
 
 ## Overview:
-The `PostgresRetriever` function implements dense retrieval, using vector embeddings to represent documents and queries, performing a similarity search based on vector representations. The hybrid approach of the HybridPostgresRetriever  function combines dense retrieval with keyword-based retrieval to enhance flexibility.
+The `PostgresRetriever` function implements dense retrieval, using vector embeddings to represent documents and queries, performing a similarity search based on vector representations. The hybrid approach of the `HybridPostgresRetriever`  function combines dense retrieval with keyword-based retrieval to enhance flexibility.
 
 ## Key Observations:
 ### 1. **PostgresRetriever**:
