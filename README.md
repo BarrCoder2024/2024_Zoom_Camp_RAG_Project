@@ -56,7 +56,47 @@ This application demonstrates the practical utility of a Retrieval-Augmented Gen
    - A semantic coherence score of 0.8127 indicates that the documents returned across queries are fairly coherent in terms of their content and meaning. A score above 0.8 is typically considered strong, meaning that the system is returning semantically related content for similar queries.
 
 
-## RAG Evaluation
+# RAG Evaluation
+
+## Analysis of Results:
+
+In selecting the optimal model for a RAG system for Q&A on mental health, I focused on the following factors:
+
+- **Latency**: How fast the model generates a response.
+- **Cosine Similarity**: This tells us how similar the responses of the two models are. A high cosine similarity (close to 1) indicates that both models produce very similar answers.
+- **Output Tokens**: This represents the verbosity of the response. In a mental health context, a balance between concise and thorough explanations is key.
+
+## Key Observations:
+
+### 1. Latency:
+
+- **gpt-3.5-turbo (temp=0)** is generally faster than **gpt-4o-mini (temp=0)** in most cases. For example:
+  - **Query 6**: gpt-3.5-turbo (temp=0) has a latency of `4.10s` vs. gpt-4o-mini (temp=0) with `22.53s`, which is a significant difference.
+  - **Query 18**: gpt-3.5-turbo (temp=0) has a latency of `5.36s` vs. gpt-4o-mini (temp=0) with `3.31s` (an exception where GPT-4 is faster).
+- **gpt-3.5-turbo (temp=0.7)** is generally slower than gpt-3.5-turbo (temp=0) but performs faster than gpt-4o-mini models on average.
+
+### 2. Cosine Similarity:
+
+- Cosine Similarity across all comparisons is quite high, ranging between `0.945` and `0.996`, indicating that the models produce very similar responses.
+- The highest cosine similarity values appear when comparing **gpt-4o-mini (temp=0)** with **gpt-4o-mini (temp=0.5)**, as expected since they are variations of the same model.
+- However, even **gpt-3.5-turbo** vs. **gpt-4o-mini** shows high cosine similarity (e.g., **Query 3** has a cosine similarity of `0.966`).
+
+### 3. Output Tokens:
+
+- **gpt-4o-mini** generally produces longer responses (higher token counts), which can be beneficial for a thorough Q&A system. For example:
+  - **Query 1**: gpt-3.5-turbo (temp=0) has `264` tokens vs. gpt-4o-mini (temp=0) with `550` tokens.
+  - **Query 18**: gpt-3.5-turbo (temp=0) has `284` tokens vs. gpt-4o-mini (temp=0) with `458` tokens.
+- **gpt-3.5-turbo** tends to give shorter, more concise answers, which might be more suitable if you're looking for efficiency and brevity.
+
+## Considerations:
+- **If Latency is Critical**: If we want faster responses, **gpt-3.5-turbo (temp=0)** is the best choice. It provides consistently lower latency compared to the gpt-4o-mini models, while still maintaining high similarity to more verbose outputs from GPT-4.
+- **If Detailed Responses are Essential**: If more comprehensive responses are important for the mental health Q&A system, **gpt-4o-mini (temp=0.5)** would be the preferred choice. It offers more verbose and detailed outputs (higher token counts) while still producing responses similar to other models.
+- **Cosine Similarity Consistency**: Since both models produce very similar responses across all queries (cosine similarity generally above `0.95`), either model would provide reliable answers in terms of content quality.
+
+## Final Choice:
+- For a RAG system focused on mental health Q&A, I went with using **gpt-3.5-turbo (temp=0)**. It has lower latency, reasonably concise responses, and high similarity with the outputs of the larger **gpt-4o-mini** models. This makes it ideal for real-time Q&A systems where response speed and content similarity are critical.
+- If verbosity and more detailed responses are necessary (and both cost and latency were less important), I would have probably gone with **gpt-4o-mini (temp=0.5)**.
+
 
 ## Acknowledgments
 
