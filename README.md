@@ -98,6 +98,13 @@ This approach could lead to more robust and empathetic AI models, capable of pro
 - **Pydantic 2.8.2**
 - **Typing-extensions 4.12.2**
 
+# The Operation of the Retrieval Function
+
+1. Relevant documents are retrieved based on vector similarity.
+2. Answers for these documents are fetched through a separate query.
+3. Relevance and trust scores are calculated for each answer.
+4. The top 10 answers for each document are selected.
+5. Documents are then sorted based on the highest-scoring answer.
 
 # Retrieval Evaluation
 
