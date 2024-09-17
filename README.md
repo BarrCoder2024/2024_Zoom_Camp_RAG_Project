@@ -115,11 +115,15 @@ In selecting the optimal model for a RAG system for Q&A on mental health, I focu
   - **Query 18**: gpt-3.5-turbo (temp=0) has a latency of `5.36s` vs. gpt-4o-mini (temp=0) with `3.31s` (an exception where GPT-4 is faster).
 - **gpt-3.5-turbo (temp=0.7)** is generally slower than gpt-3.5-turbo (temp=0) but performs faster than gpt-4o-mini models on average.
 
+<img src="images/rag_test_1.png" alt="Example Image" style="width:100%; height:100%;" />
+
 ### 2. Cosine Similarity:
 
 - Cosine Similarity across all comparisons is quite high, ranging between `0.945` and `0.996`, indicating that the models produce very similar responses.
 - The highest cosine similarity values appear when comparing **gpt-4o-mini (temp=0)** with **gpt-4o-mini (temp=0.5)**, as expected since they are variations of the same model.
 - However, even **gpt-3.5-turbo** vs. **gpt-4o-mini** shows high cosine similarity (e.g., **Query 3** has a cosine similarity of `0.966`).
+
+<img src="images/rag_test_2.png" alt="Example Image" style="width:100%; height:100%;" />
 
 ### 3. Output Tokens:
 
@@ -127,6 +131,8 @@ In selecting the optimal model for a RAG system for Q&A on mental health, I focu
   - **Query 1**: gpt-3.5-turbo (temp=0) has `264` tokens vs. gpt-4o-mini (temp=0) with `550` tokens.
   - **Query 18**: gpt-3.5-turbo (temp=0) has `284` tokens vs. gpt-4o-mini (temp=0) with `458` tokens.
 - **gpt-3.5-turbo** tends to give shorter, more concise answers, which might be more suitable if you're looking for efficiency and brevity.
+
+<img src="images/rag_test_3.png" alt="Example Image" style="width:100%; height:100%;" />
 
 ## Considerations:
 - **If Latency is Critical**: If we want faster responses, **gpt-3.5-turbo (temp=0)** is the best choice. It provides consistently lower latency compared to the gpt-4o-mini models, while still maintaining high similarity to more verbose outputs from GPT-4.
