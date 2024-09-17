@@ -43,7 +43,7 @@ This application demonstrates the practical utility of a Retrieval-Augmented Gen
 - **CSS** (styling) 
 - **JavaScript** (interactivity)
 
-## AI and Machine Learning
+## AI  
 - **OpenAI API 1.43.0** (Language Model)
 - **LangChain 0.2.16** and related packages (AI/ML toolkit)
 - **OpenAIEmbeddings** (for text embeddings)
