@@ -55,6 +55,45 @@ This application demonstrates the practical utility of a Retrieval-Augmented Gen
 5. **Semantic Coherence**: `0.8127`
    - A semantic coherence score of 0.8127 indicates that the documents returned across queries are fairly coherent in terms of their content and meaning. A score above 0.8 is typically considered strong, meaning that the system is returning semantically related content for similar queries.
 
+# Dense retrieval vs dense retrieval with keyword-based retrieval:
+# Analysis of two retrieval functions PostgresRetriever and HybridPostgresRetriever
+
+## Overview:
+The `PostgresRetriever` function implements dense retrieval, using vector embeddings to represent documents and queries, performing a similarity search based on vector representations. The hybrid approach of the HybridPostgresRetriever  function combines dense retrieval with keyword-based retrieval to enhance flexibility.
+
+## Key Observations:
+### 1. **PostgresRetriever**:
+- **Precision**: `0.7600` (76% of retrieved documents are relevant)
+- **Recall**: `1.0000` (finds at least one relevant document for every query)
+- **Response Time**: `1.1963` seconds (average)
+- **Semantic Coherence**:
+  - Calculated for 10 queries
+  - **Average Score**: `0.8495`
+  - **Range**: `0.8158` to `0.9018`
+
+### 2. **HybridPostgresRetriever**:
+- **Precision**: `0.3000` (30% of retrieved documents are relevant)
+- **Recall**: `0.3000` (finds relevant documents for only 30% of queries)
+- **Response Time**: `0.5788` seconds (average)
+- **Semantic Coherence**:
+  - Calculated for only 1 query
+  - **Score**: `0.7862`
+
+## Analysis:
+- **Precision and Recall**: The PostgresRetriever outperforms the HybridPostgresRetriever significantly. It has high precision and perfect recall, meaning it retrieves relevant documents effectively.
+- **Response Time**: The HybridPostgresRetriever is faster but retrieves fewer relevant documents, which explains its lower performance in precision and recall.
+- **Semantic Coherence**: The PostgresRetriever maintains high coherence across queries, while the HybridPostgresRetriever's limited data makes it hard to evaluate.
+
+## Conclusions:
+- The **PostgresRetriever** is more effective, providing consistently relevant, semantically coherent results, albeit with slightly slower response times.
+- The **HybridPostgresRetriever** underperforms in precision and recall, making it less suitable despite its faster response time.
+
+## Final choice:
+In summary, the PostgresRetriever provides superior performance, with high relevance and semantic coherence across all queries. The HybridPostgresRetriever requires significant improvements to be a viable alternative.
+
+I decided to **Stick with PostgresRetriever** for its high-quality results in all key metrics.
+
+
 
 # RAG Evaluation
 
