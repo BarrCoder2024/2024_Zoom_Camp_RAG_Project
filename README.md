@@ -50,7 +50,7 @@ This application demonstrates the practical utility of a Retrieval-Augmented Gen
 
 ## Data Storage and Caching
 - **Azure Blob Storage** (storage of raw data before processing & vectorisation)
-- ** Azure Database for PostgreSQL flexible server + pgvector** (vector database)
+- **Azure Database for PostgreSQL flexible server & pgvector** (vector database)
 - **Redis 5.0.8** (caching)
 
 ## Development and Deployment
