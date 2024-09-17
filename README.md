@@ -78,6 +78,8 @@ The `PostgresRetriever` function implements dense retrieval, using vector embedd
   - Calculated for only 1 query
   - **Score**: `0.7862`
 
+<img src="images/comparison_of_retrievers.png" alt="Example Image" style="width:60%; height:60%;" />
+
 ## Analysis:
 - **Precision and Recall**: The PostgresRetriever outperforms the HybridPostgresRetriever significantly. It has high precision and perfect recall, meaning it retrieves relevant documents effectively.
 - **Response Time**: The HybridPostgresRetriever is faster but retrieves fewer relevant documents, which explains its lower performance in precision and recall.
@@ -131,7 +133,7 @@ In selecting the optimal model for a RAG system for Q&A on mental health, I focu
 - **If Detailed Responses are Essential**: If more comprehensive responses are important for the mental health Q&A system, **gpt-4o-mini (temp=0.5)** would be the preferred choice. It offers more verbose and detailed outputs (higher token counts) while still producing responses similar to other models.
 - **Cosine Similarity Consistency**: Since both models produce very similar responses across all queries (cosine similarity generally above `0.95`), either model would provide reliable answers in terms of content quality.
 
-## Final Choice:
+## Final choice:
 - For a RAG system focused on mental health Q&A, I went with using **gpt-3.5-turbo (temp=0)**. It has lower latency, reasonably concise responses, and high similarity with the outputs of the larger **gpt-4o-mini** models. This makes it ideal for real-time Q&A systems where response speed and content similarity are critical.
 - If verbosity and more detailed responses are necessary (and both cost and latency were less important), I would have probably gone with **gpt-4o-mini (temp=0.5)**.
 
