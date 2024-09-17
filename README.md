@@ -78,7 +78,7 @@ The `PostgresRetriever` function implements dense retrieval, using vector embedd
   - Calculated for only 1 query
   - **Score**: `0.7862`
 
-<img src="images/comparison_of_retrievers.png" alt="Example Image" style="width:60%; height:60%;" />
+<img src="images/comparison_of_retrievers.png" alt="Example Image" style="width:100%; height:100%;" />
 
 ## Analysis:
 - **Precision and Recall**: The PostgresRetriever outperforms the HybridPostgresRetriever significantly. It has high precision and perfect recall, meaning it retrieves relevant documents effectively.
