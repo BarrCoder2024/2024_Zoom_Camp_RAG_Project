@@ -34,29 +34,14 @@ This application demonstrates the practical utility of a Retrieval-Augmented Gen
 # Project Data  
 
 ### Dataset Composition  
-The dataset used for this project is a combination of two sources:
-- **Verified therapists' responses** from Counselchat.com  
+The dataset used for this project combines data from two different sources:
+- Verified therapists' responses from **Counselchat.com**  
 - **Mental Health Dataset** designed for AI-driven conversational models
 
-### Potential Benefits  
-By combining these datasets, it is possible to develop more sophisticated RAG (Retrieval-Augmented Generation) Q&A models with the following capabilities:
-- **Interacting with users** on sensitive mental health topics  
-- **Offering support and accurate information**  
-- **Potentially helping individuals in distress**  
 
-### Key Advantages
-- **Expertise**: Inclusion of verified therapists' responses ensures professional insights.  
-- **Diversity**: The AI-driven conversational dataset provides a broad range of user interactions.  
-- **Versatility**: The combined dataset enables models to handle a wide array of scenarios, from casual greetings to serious mental health concerns.
-
-### Implications for Model Development  
-This approach could result in more robust and empathetic AI models, capable of providing meaningful support in mental health contexts while maintaining accuracy and relevance.
-
-### Ethical Considerations  
-While promising, it is essential to approach the development and deployment of such models with careful consideration of ethical implications and the potential risks associated with using AI in mental health support. AI should complement human intervention and not replace professional care.
 
 ## 1. Counselchat.com Dataset
-[See here for Counselchat.com article](https://towardsdatascience.com/counsel-chat-bootstrapping-high-quality-therapy-data-971b419f33da)
+
 **Overview:**  
 The Counselchat.com dataset is derived from an expert community where verified therapists respond to user-submitted mental health questions. This platform allows licensed mental health professionals to provide guidance and build their reputations, making the data highly credible. The dataset contains both scraped and officially provided data from the platform.
 
@@ -82,8 +67,10 @@ The Counselchat.com dataset is derived from an expert community where verified t
 **Observations:**  
 The dataset is highly useful for training language models (LLMs) for mental health-related tasks, providing expert responses for analysis and prediction models. The data ensures that all advice comes from licensed professionals, improving reliability over crowdsourced alternatives.
 
+[See here for Counselchat.com article](https://towardsdatascience.com/counsel-chat-bootstrapping-high-quality-therapy-data-971b419f33da)
+
 ## 2. Mental Health Dataset
-[See here for Mental Health Dataset on Kaggle](https://www.kaggle.com/datasets/jiscecseaiml/mental-health-dataset?resource=download)
+
 **Overview:**  
 This dataset is designed for building AI-driven chatbots and virtual assistants that interact with users on mental health topics. It provides a range of user inputs and corresponding responses to facilitate the detection of various mental health conditions and user intents.
 
@@ -95,9 +82,29 @@ This dataset is designed for building AI-driven chatbots and virtual assistants 
 - **Format:** Structured as user input patterns and predefined responses to train natural language processing (NLP) models.
 - **Use Cases:** Ideal for training AI/ML models for virtual health assistants, chatbots, and conversational AI systems that support mental health.
 
+[See here for Mental Health Dataset on Kaggle](https://www.kaggle.com/datasets/jiscecseaiml/mental-health-dataset?resource=download)
 
-### RAG and LLM Applications:
-Both datasets are crucial for Retrieval-Augmented Generation (RAG) systems and large language models (LLMs). They provide high-quality data to build robust AI models capable of retrieving and generating relevant responses in mental health contexts. By integrating expert knowledge from Counselchat.com and diverse conversational inputs from the Mental Health Dataset, these AI-driven tools can enhance their trustworthiness and effectiveness in supporting mental health.
+### Potential Benefits of Combining Expert Opinions with Diverse Conversational Inputs for RAG and LLM Applications
+
+Combining such datasets is crucial for Retrieval-Augmented Generation (RAG) systems and large language models (LLMs) aimed at providing high-quality, relevant responses in mental health contexts. By integrating expert knowledge and diverse conversational inputs, AI-driven tools can enhance their trustworthiness and effectiveness in supporting mental health. 
+
+### Key capabilities include:
+
+- Interacting with users on sensitive mental health topics  
+- Offering support and accurate information  
+- Potentially helping individuals in distress  
+
+### Key Advantages
+
+- **Expertise**: Inclusion of verified therapists' responses ensures professional insights.  
+- **Diversity**: The AI-driven conversational dataset provides a broad range of user interactions.  
+- **Versatility**: The combined dataset enables models to handle various scenarios, from casual greetings to serious mental health concerns.
+
+### Implications for Model Development  
+This approach could lead to more robust and empathetic AI models, capable of providing meaningful support in mental health contexts while maintaining accuracy and relevance.
+
+### Ethical Considerations  
+While promising, it's essential to approach the development and deployment of such models with careful consideration of ethical implications and the potential risks associated with using AI in mental health support. AI should complement human intervention and not replace professional care.
 
 
 # Data Stack
